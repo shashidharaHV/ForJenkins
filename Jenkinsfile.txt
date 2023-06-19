@@ -1,0 +1,21 @@
+node('master')
+{
+	stage('continuous download') {
+    		git branch: 'main', url: 'https://github.com/shashidharaHV/ForJenkins.git'
+	}
+	stage('continuous build') {
+    		sh 'mvn package'
+	}
+
+	stage('continuous build') {
+    		sh 'scp  /home/ubuntu/jenkins/workspace/webapp.war  ubuntu@12.1.34/lib/tomcat/web.war'
+	}
+
+	stage('continuous testing')  {
+		sh 'echo "testing passed"'
+	}
+
+	stage('continuous delivery') {
+    		sh 'scp  /home/ubuntu/jenkins/workspace/webapp.war  ubuntu@12.1.34/lib/tomcat/web.war'
+	}
+}
